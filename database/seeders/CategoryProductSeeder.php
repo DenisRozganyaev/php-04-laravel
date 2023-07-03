@@ -15,6 +15,10 @@ class CategoryProductSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('category_product')->delete();
+        DB::table('categories')->delete();
+        DB::table('products')->delete();
+
         Category::factory(5)
             ->create()
             ->each(function(Category $category) {
