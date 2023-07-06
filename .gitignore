@@ -18,3 +18,7 @@ yarn-error.log
 /.idea
 /.vscode
 public/soft-ui-dashboard-tailwind-main
+_ide_helper.php
+.DS_Store
+public/.DS_Store
+public/soft-ui-dashboard-tailwind-main.zip
