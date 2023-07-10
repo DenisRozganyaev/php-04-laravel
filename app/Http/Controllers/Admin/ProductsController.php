@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProductRequest;
+use App\Models\Category;
+use App\Models\Product;
+use App\Repositories\Contracts\ProductRepositoryContract;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -12,7 +16,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::with('categories')->orderByDesc('id')->paginate(5);
+
+        return view('admin/products/index', compact('products'));
     }
 
     /**
@@ -20,15 +26,19 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin/products/create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request, ProductRepositoryContract $repository)
     {
-        //
+        return $repository->create($request)
+            ? redirect()->route('admin.products.index')
+            : redirect()->back()->withInput();
     }
 
     /**

@@ -2,10 +2,15 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\ProductRepositoryContract;
+use App\Repositories\ProductRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public array $bindings = [
+        ProductRepositoryContract::class => ProductRepository::class
+    ];
 
     /**
      * Register any application services.
@@ -19,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
     }
 }
