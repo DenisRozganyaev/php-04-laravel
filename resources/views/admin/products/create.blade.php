@@ -13,6 +13,7 @@
                                 <h1 class="text-2xl font-bold mb-6 text-center">Create product</h1>
                                 <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md"
                                       action="{{route('admin.products.store')}}"
+                                      enctype="multipart/form-data"
                                       method="POST">
                                     @csrf
 
@@ -85,6 +86,30 @@
                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                                             type="number" id="quantity" name="quantity" placeholder="5" min="0">
                                         <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <img src="#" id="thumbnail-preview">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2"
+                                               for="thumbnail">Thumbnail</label>
+                                        <input
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                                            type="file" id="thumbnail" name="thumbnail">
+                                        <x-input-error :messages="$errors->get('thumbnail')" class="mt-2" />
+                                    </div>
+
+                                    <div class="mb-4 images-wrapper">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2"
+                                               for="images">Images</label>
+                                        <input
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                                            type="file" id="images" name="images[]" multiple>
                                     </div>
 
                                     <x-button action="submit" type="button" class="w-full m-0 font-bold">Create

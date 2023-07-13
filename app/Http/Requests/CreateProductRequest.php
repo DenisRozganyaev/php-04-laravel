@@ -29,6 +29,8 @@ class CreateProductRequest extends FormRequest
             'price' => ['required', 'numeric', 'min:1'],
             'discount' => ['required', 'numeric', 'min:0', 'max:99'],
             'quantity' => ['required', 'numeric', 'min:0'],
+            'thumbnail' => ['required', 'image:jpeg,png'],
+            'images.*' => ['image:jpeg,png'],
             'categories.*' => ['nullable', 'numeric', 'exists:App\Models\Category,id']
         ];
     }

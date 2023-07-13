@@ -1,3 +1,5 @@
+import '../bootstrap'
+
 import './soft-ui-dashboard-tailwind'
 import './plugins/chartjs.min'
 import './plugins/perfect-scrollbar.min'
@@ -16,3 +18,6 @@ import.meta.glob([
     '../images/**',
     '../fonts/**',
 ]);
+
+import './scripts/images-preview'
+import './scripts/image-actions'
