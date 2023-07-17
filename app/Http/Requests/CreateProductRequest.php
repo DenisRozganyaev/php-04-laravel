@@ -27,7 +27,7 @@ class CreateProductRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'SKU' => ['required', 'string', 'min:1', 'max:35', 'unique:' . Product::class],
             'price' => ['required', 'numeric', 'min:1'],
-            'discount' => ['required', 'numeric', 'min:0', 'max:99'],
+            'discount' => ['nullable', 'numeric', 'min:0', 'max:99'],
             'quantity' => ['required', 'numeric', 'min:0'],
             'thumbnail' => ['required', 'image:jpeg,png'],
             'images.*' => ['image:jpeg,png'],

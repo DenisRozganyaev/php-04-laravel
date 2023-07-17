@@ -74,7 +74,7 @@ class Product extends Model
     public function thumbnailUrl(): Attribute
     {
         return Attribute::make(
-            get: function() {
+            get: function () {
                 if (!Storage::exists($this->attributes['thumbnail'])) {
                     return $this->attributes['thumbnail'];
                 }
@@ -96,4 +96,24 @@ class Product extends Model
             $this->attributes['slug']
         );
     }
+
+    public function price(): Attribute
+    {
+        return Attribute::get(fn() => round($this->attributes['price'], 2));
+    }
+
+    public function endPrice(): Attribute
+    {
+        return Attribute::get(function() {
+            $price = $this->attributes['price'];
+            $discount = $this->attributes['discount'] ?? 0;
+
+            $endPrice =  $discount === 0
+                ? $price
+                : ($price - ($price * $discount / 100));
+
+            return $endPrice <= 0 ? 1 : round($endPrice, 2);
+        });
+    }
+
 }

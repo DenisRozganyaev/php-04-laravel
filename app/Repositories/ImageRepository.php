@@ -16,7 +16,10 @@ class ImageRepository implements Contracts\ImageRepositoryContract
         if (!empty($images)) {
             foreach ($images as $image) {
                 // $product->images()
-                call_user_func([$model, $relation])->create(['directory' => $directory, 'path' => $image]);
+                call_user_func([$model, $relation])->create(['path' => [
+                    'image' => $image,
+                    'directory' => $directory
+                ]]);
             }
         }
     }
