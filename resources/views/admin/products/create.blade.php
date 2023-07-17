@@ -38,7 +38,7 @@
                                                for="SKU">SKU</label>
                                         <input
                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                                            type="text" id="SKU" name="SKU" placeholder="NS228JG">
+                                            type="text" id="SKU" name="SKU" placeholder="NS228JG" value="{{ old('SKU') }}">
                                         <x-input-error :messages="$errors->get('SKU')" class="mt-2" />
                                     </div>
                                     <div class="mb-4">
@@ -46,7 +46,7 @@
                                                for="title">Title</label>
                                         <input
                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                                            type="text" id="title" name="title" placeholder="Product title">
+                                            type="text" id="title" name="title" placeholder="Product title" value="{{ old('title') }}">
                                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
                                     </div>
                                     <div class="mb-4">
@@ -57,7 +57,7 @@
                                             id="description"
                                             placeholder="Type your message"
                                             class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                        ></textarea>
+                                        >{{ old('description') }}</textarea>
                                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                     </div>
 
@@ -66,7 +66,7 @@
                                                for="price">Price</label>
                                         <input
                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                                            type="text" id="price" name="price" placeholder="22.25">
+                                            type="text" id="price" name="price" placeholder="22.25" value="{{ old('price') }}">
                                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                                     </div>
 
@@ -75,7 +75,7 @@
                                                for="discount">Discount</label>
                                         <input
                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                                            type="number" id="discount" name="discount" placeholder="22" min="0" max="100" value="0">
+                                            type="number" id="discount" name="discount" placeholder="22" min="0" max="100" value="{{ old('discount') }}">
                                         <x-input-error :messages="$errors->get('discount')" class="mt-2" />
                                     </div>
 
@@ -84,7 +84,7 @@
                                                for="quantity">Quantity</label>
                                         <input
                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                                            type="number" id="quantity" name="quantity" placeholder="5" min="0">
+                                            type="number" id="quantity" name="quantity" placeholder="5" min="0" value="{{ old('quantity') }}">
                                         <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
                                     </div>
 
