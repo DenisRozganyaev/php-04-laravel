@@ -5,9 +5,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css',
+                'resources/css/app.scss',
                 'resources/css/admin/app.scss',
                 'resources/js/app.js',
+                'resources/js/counter.js',
                 'resources/js/admin/app.js',
                 'resources/fonts/admin/nucleo.eot',
                 'resources/fonts/admin/nucleo.ttf',
