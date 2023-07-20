@@ -16,7 +16,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "sass": "^1.63.6",
-        "jquery": "^3.6.3"
+        "flowbite": "^1.7.0",
+        "jquery": "^3.6.3",
+        "sass": "^1.63.6"
     }
 }

@@ -11,6 +11,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import $ from 'jquery'
 window.$ = $;
+import 'flowbite';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
