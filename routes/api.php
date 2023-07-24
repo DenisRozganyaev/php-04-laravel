@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::middleware('auth:sanctum')->group(function() {
+//    Route::prefix('paypal')->name('paypal.')->group(function() {
+//        Route::post('order/create', [\App\Http\Controllers\Api\Payments\PaypalController::class, 'create'])->name('orders.create');
+//        Route::post('order/{orderId}/capture', [\App\Http\Controllers\Api\Payments\PaypalController::class, 'capture'])->name('orders.capture');
+//    });
+});
