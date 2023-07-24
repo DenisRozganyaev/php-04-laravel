@@ -16,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
-Route::resource('products', \App\Http\Controllers\ProductsController::class)->only(['index', 'show']);
-Route::resource('categories', \App\Http\Controllers\CategoriesController::class)->only(['index', 'show']);
+Route::resource('products', \App\Http\Controllers\ProductsController::class)
+    ->only(['index', 'show'])
+    ->scoped(['product' => 'slug']);
+Route::resource('categories', \App\Http\Controllers\CategoriesController::class)
+    ->only(['index', 'show'])
+    ->scoped(['product' => 'slug']);;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,6 +33,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
+    Route::get('orders/{orderId}/thank-you', \App\Http\Controllers\Orders\ThankYouPageController::class)->name('payment.thankyou');
+
+    Route::prefix('paypal')->name('paypal.')->group(function() {
+       Route::post('order/create', [\App\Http\Controllers\Ajax\Payments\PaypalController::class, 'create'])->name('orders.create');
+       Route::post('order/{orderId}/capture', [\App\Http\Controllers\Ajax\Payments\PaypalController::class, 'capture'])->name('orders.capture');
+    });
 });
 
 require __DIR__.'/auth.php';
@@ -43,6 +53,10 @@ Route::name('admin.')->prefix('admin')->middleware(['role:admin|moderator'])->gr
 Route::name('ajax.')->middleware('auth')->prefix('ajax')->group(function() {
     Route::group(['role:admin|moderator'], function() {
         Route::delete('images/{image}', \App\Http\Controllers\Ajax\RemoveImageController::class)->name('images.delete');
+    });
+    Route::prefix('paypal')->name('paypal.')->group(function() {
+        Route::post('order/create', [\App\Http\Controllers\Ajax\Payments\PaypalController::class, 'create'])->name('orders.create');
+        Route::post('order/{orderId}/capture', [\App\Http\Controllers\Ajax\Payments\PaypalController::class, 'capture'])->name('orders.capture');
     });
 });
 

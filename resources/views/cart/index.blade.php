@@ -50,23 +50,23 @@
             <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
                 <div class="mb-2 flex justify-between">
                     <p class="text-gray-700">Subtotal</p>
-                    <p class="text-gray-700">${{ Cart::subtotal() }}</p>
+                    <p class="text-gray-700">${{ Cart::instance('cart')->subtotal() }}</p>
                 </div>
                 <div class="flex justify-between">
                     <p class="text-gray-700">Tax</p>
-                    <p class="text-gray-700">${{ Cart::tax() }}</p>
+                    <p class="text-gray-700">${{ Cart::instance('cart')->tax() }}</p>
                 </div>
                 <hr class="my-4"/>
                 <div class="flex justify-between">
                     <p class="text-lg font-bold">Total</p>
                     <div class="flex flex-col items-end">
-                        <p class="mb-1 text-lg font-bold">${{ Cart::total() }}</p>
+                        <p class="mb-1 text-lg font-bold">${{ Cart::instance('cart')->total() }}</p>
                         <p class="text-sm text-gray-700">including Tax</p>
                     </div>
                 </div>
-                <button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
+                <x-button href="{{route('checkout')}}" class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
                     Check out
-                </button>
+                </x-button>
             </div>
         </div>
     </div>
