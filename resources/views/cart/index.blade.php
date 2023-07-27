@@ -14,17 +14,23 @@
                                 <p class="text-sm">${{ $product->price }}</p>
                             </div>
                             <div class="mt-4 flex flex-col items-end justify-end sm:space-y-6 sm:mt-0 sm:space-x-6">
-                                <form class="flex items-center border-gray-100">
+                                <form class="flex items-center counter-form border-gray-100" action="{{ route('cart.count.update', $product->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{$product->rowId}}" name="rowId">
                                     <button data-action="decrement"
-                                        class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                                            data-type="submit"
+                                            class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
                                     > - </button>
-                                    <input class="product-count h-8 w-8 border bg-white text-center text-xs outline-none" type="number"
+                                    <input class="product-count h-8 w-8 border bg-white text-center text-xs outline-none"
+                                           type="number"
                                            value="{{ $product->qty }}"
                                            min="1"
                                            max="{{$product->model->quantity}}"
+                                           name="product_count"
                                     />
                                     <button data-action="increment"
-                                        class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </button>
+                                            data-type="submit"
+                                            class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </button>
                                 </form>
                                 <div class="flex items-center space-x-4">
                                     <p class="text-sm"><b>Total: </b>${{ $product->subtotal }}</p>

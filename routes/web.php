@@ -34,11 +34,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
     Route::get('orders/{orderId}/thank-you', \App\Http\Controllers\Orders\ThankYouPageController::class)->name('payment.thankyou');
-
-    Route::prefix('paypal')->name('paypal.')->group(function() {
-       Route::post('order/create', [\App\Http\Controllers\Ajax\Payments\PaypalController::class, 'create'])->name('orders.create');
-       Route::post('order/{orderId}/capture', [\App\Http\Controllers\Ajax\Payments\PaypalController::class, 'capture'])->name('orders.capture');
-    });
 });
 
 require __DIR__.'/auth.php';
