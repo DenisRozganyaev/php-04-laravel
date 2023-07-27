@@ -38,10 +38,19 @@ class CartController extends Controller
      * Update count per product inside cart
      * @param Request $request
      * @param Product $product
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function countUpdate(Request $request, Product $product)
     {
+        $count = $request->get('product_count', 1);
+        $rowId = $request->get('rowId');
 
+        if (!$rowId || $product->quantity < $count) {
+            return redirect()->back();
+        }
+
+        Cart::instance('cart')->update($rowId, $count);
+
+        return redirect()->back();
     }
 }

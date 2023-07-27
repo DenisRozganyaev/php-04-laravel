@@ -11,22 +11,38 @@ const productSelectors = {
 $(document).ready(function() {
     $(document).on('click', productSelectors.counter.decreaseBtn, function(e) {
         e.preventDefault()
+        const $counter = $(this).parent().find(productSelectors.counter.input)
+        let value = Number($counter.val())
 
-        let value = Number($(productSelectors.counter.input).val())
         value--
+
         if (value > 0) {
-            $(productSelectors.counter.input).val(value)
+            $counter.val(value)
+            submitForm($(this))
         }
     })
 
     $(document).on('click', productSelectors.counter.increaseBtn, function(e) {
         e.preventDefault()
-        const max = Number($(productSelectors.counter.input).attr('max'))
-        let value = Number($(productSelectors.counter.input).val())
+        const $counter = $(this).parent().find(productSelectors.counter.input)
+        const max = Number($counter.attr('max'))
+        let value = Number($counter.val())
+
         value++;
 
         if (value <= max) {
-            $(productSelectors.counter.input).val(value)
+            $counter.val(value)
+            submitForm($(this))
         }
     })
+
+    $(document).on('change', '.counter-form .product-count', function(e) {
+        $(this).parent().submit();
+    })
 })
+
+function submitForm($btn) {
+    if($btn.data('type') === 'submit') {
+        $btn.parent().submit();
+    }
+}

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Enums\PaymentSystem;
+use App\Enums\TransactionStatus;
 use App\Http\Requests\CreateOrderRequest;
 use App\Repositories\Contracts\OrderRepositoryContract;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -10,9 +12,9 @@ use Srmklive\PayPal\Services\PayPal;
 
 class PaypalService implements Contracts\PaypalServiceContract
 {
-    const PAYMENT_SYSTEM = 'PAYPAL';
-
     protected PayPal $payPalClient;
+
+    const COMPLETED = "COMPLETED";
 
     public function __construct()
     {
@@ -30,6 +32,7 @@ class PaypalService implements Contracts\PaypalServiceContract
             $request = array_merge(
                 $request->validated(),
                 [
+                    'vendor_order_id' => $paypalOrder['id'],
                     'total' => $total
                 ]
             );
@@ -48,9 +51,16 @@ class PaypalService implements Contracts\PaypalServiceContract
         try {
             DB::beginTransaction();
 
-
+            $result = $this->payPalClient->capturePaymentOrder($vendorOrderId);
+            $order = $repository->setTransaction(
+                $vendorOrderId,
+                PaymentSystem::Paypal,
+                $this->convertStatus($result['status'])
+            );
+            $result['orderId'] = $order->id;
             DB::commit();
 
+            return response()->json($order);
         } catch (\Exception $exception) {
             DB::rollBack();
             return $this->errorHandler($exception);
@@ -64,7 +74,7 @@ class PaypalService implements Contracts\PaypalServiceContract
             'purchase_units' => [
                 [
                     'amount' => [
-                        'currency' => config('paypal.currency'),
+                        'currency_code' => config('paypal.currency'),
                         'value' => $total
                     ]
                 ]
@@ -76,5 +86,14 @@ class PaypalService implements Contracts\PaypalServiceContract
     {
         logs()->warning($exception);
         return response()->json(['error' => $exception->getMessage()], 422);
+    }
+
+    protected function convertStatus(string $status): TransactionStatus
+    {
+        return match($status) {
+            static::COMPLETED, "APPROVED" => TransactionStatus::Success,
+            "CREATED", "SAVED" => TransactionStatus::Pending,
+            default => TransactionStatus::Canceled
+        };
     }
 }
