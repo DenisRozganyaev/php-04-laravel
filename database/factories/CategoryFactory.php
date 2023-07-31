@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -25,5 +26,14 @@ class CategoryFactory extends Factory
             'slug' => $slug,
             'description' => fake()->sentences(rand(1, 5), true),
         ];
+    }
+
+    public function withParent(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'parent_id' => Category::all()->random()?->id
+            ];
+        });
     }
 }
