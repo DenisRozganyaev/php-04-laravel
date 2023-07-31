@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * App\Models\Product
@@ -115,6 +116,11 @@ class Product extends Model implements Buyable
 
             return $endPrice <= 0 ? 1 : round($endPrice, 2);
         });
+    }
+
+    public function scopeAvailable(Builder $query): Builder
+    {
+        return $query->where('quantity', '>', 0);
     }
 
     public function getBuyableIdentifier($options = null)
