@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
-    Route::get('orders/{orderId}/thank-you', \App\Http\Controllers\Orders\ThankYouPageController::class)->name('payment.thankyou');
+    Route::get('orders/{order}/paypal/thank-you', [\App\Http\Controllers\Orders\ThankYouPageController::class, 'paypal'])->name('payment.thankyou');
 });
 
 require __DIR__.'/auth.php';

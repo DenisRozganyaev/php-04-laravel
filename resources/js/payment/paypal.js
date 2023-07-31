@@ -52,7 +52,11 @@ paypal.Buttons({
         console.log('data', data)
         return axios.post(`/ajax/paypal/order/${data.orderID}/capture/`)
             .then(function (res) {
-                console.log('capture response', res)
+                iziToast.success({
+                    title: 'Payment process was completed',
+                    position: 'topRight',
+                    onClosing: () => { window.location.href = `/orders/${res.data.id}/paypal/thank-you` }
+                })
             }).catch((orderData) => {
                 var errorDetail = Array.isArray(res.data.data.details) && res.data.details[0];
 
