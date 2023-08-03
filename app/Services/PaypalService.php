@@ -60,6 +60,8 @@ class PaypalService implements Contracts\PaypalServiceContract
             $result['orderId'] = $order->id;
             DB::commit();
 
+            \App\Events\OrderCreated::dispatch($order);
+
             return response()->json($order);
         } catch (\Exception $exception) {
             DB::rollBack();
