@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Account\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
+
+Route::get('invoice', function() {
+   $order = \App\Models\Order::all()->last();
+   \App\Events\OrderCreated::dispatch($order);
+});
+
+Route::name('callbacks.')->prefix('callback')->middleware(['role:admin|moderator|customer'])->group(function () {
+   Route::get('telegram', \App\Http\Controllers\Callbacks\TelegramController::class)->name('telegram');
+});
 
 Route::resource('products', \App\Http\Controllers\ProductsController::class)
     ->only(['index', 'show'])
