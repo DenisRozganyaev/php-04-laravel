@@ -23,7 +23,7 @@ class CategoryProductSeeder extends Seeder
             ->create()
             ->each(function(Category $category) {
                 $category->products()->attach(
-                    Product::factory(rand(2, 4))->create()->pluck('id')
+                    Product::factory(rand(2, 4))->withColor()->create()->pluck('id')
                 );
             });
     }

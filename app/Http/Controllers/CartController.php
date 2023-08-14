@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Repositories\Contracts\ProductRepositoryContract;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,10 @@ class CartController extends Controller
         return view('cart/index');
     }
 
-    public function add(Request $request, Product $product)
+    public function add(Request $request, Product $product, ProductRepositoryContract $productRepo)
     {
         Cart::instance('cart')->add(
-            $product,
+            $productRepo->get($product, $request),
             $request->get('quantity', 1)
         );
 

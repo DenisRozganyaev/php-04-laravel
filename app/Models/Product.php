@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Attributes\Brand;
+use App\Models\Attributes\Color;
 use App\Services\FileStorageService;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
@@ -63,6 +67,16 @@ class Product extends Model implements Buyable
         'thumbnail',
     ];
 
+    public function scopeWithColor(Builder $query, int $colorId): Builder
+    {
+        return $query
+                ->select(['products.*', 'cp.price as price', 'cp.quantity as quantity', 'colors.id as color_id'])
+                ->leftJoin('color_product as cp', 'cp.product_id', '=', 'products.id')
+                ->leftJoin('colors', 'colors.id', '=', 'cp.color_id')
+                ->where('products.id', '=', $this->id)
+                ->where('colors.id', '=', $colorId);
+    }
+
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
@@ -71,6 +85,16 @@ class Product extends Model implements Buyable
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function colors(): BelongsToMany
+    {
+        return $this->belongsToMany(Color::class);
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
     }
 
     public function thumbnailUrl(): Attribute

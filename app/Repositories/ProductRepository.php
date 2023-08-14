@@ -57,6 +57,15 @@ class ProductRepository implements Contracts\ProductRepositoryContract
         }
     }
 
+    public function get(Product $product, \Illuminate\Http\Request $request): Product
+    {
+        if ($request->has('color')) {
+            $product = $product->withColor($request->get('color'))->first();
+        }
+
+        return $product;
+    }
+
     protected function formatRequestData(CreateProductRequest|UpdateProductRequest $request): array
     {
         return [

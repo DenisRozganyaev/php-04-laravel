@@ -50,7 +50,16 @@
                         </div>
                     </div>
                     <p class="leading-relaxed">{{ $product->description }}</p>
-
+                    <p class="leading-relaxed font-bold">Count: {{ $product->quantity }}</p>
+                    @if ($product->colors->count() > 0)
+                        <div class="flex align-items-start justify-start">
+                            @foreach($product->colors as $color)
+                                <a href="{{route('products.show', ['product' => $product, 'color' => $color->id])}}"
+                                   style="width: 20px; height: 20px; margin-right: 10px; display: block; background-color: {{$color->hex}}"
+                                ></a>
+                            @endforeach
+                        </div>
+                    @endif
                     <div class="flex align-items-center justify-between">
                         <div class="flex items-center justify-start w-60">
                             @if($product->price !== $product->endPrice)
@@ -80,6 +89,9 @@
                                             class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
                                         <span class="m-auto text-2xl font-thin">−</span>
                                     </button>
+                                    @if(request()->has('color'))
+                                        <input type="hidden" name="color" value="{{request()->get('color')}}" />
+                                    @endif
                                     <input type="number"
                                            min="1"
                                            max="{{$product->quantity}}"
