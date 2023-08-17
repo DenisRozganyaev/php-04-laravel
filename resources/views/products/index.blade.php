@@ -32,45 +32,67 @@
             </nav>
         </div>
     </section>
-
     <section class="bg-white">
         <div class="container px-6 py-8 mx-auto">
             <div class="lg:flex lg:-mx-2">
-                <form class="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4" method="GET" action="{{route('products.index')}}">
-                    @csrf
-                    <div class="flex flex-wrap align-items-start justify-start">
-                        @foreach($colors as $color)
-                            <label for="color_{{$color->id}}"
-                                   style="width: 20px; height: 20px; margin-right: 10px; margin-bottom: 10px; display: block; background-color: {{$color->hex}}"
-                            ></label>
-                            <input
-                                type="radio"
-                                id="color_{{$color->id}}"
-{{--                                style="display: none"--}}
-                                name="color"
-                                value="{{$color->id}}"
-                            >
-                        @endforeach
-                    </div>
-                    <!-- component -->
-                    <div class='flex items-center justify-center min-h-screen from-teal-100 via-teal-300 to-teal-500 bg-gradient-to-br'>
-                        <div class='w-full max-w-sm px-10 py-8 mx-auto bg-white rounded-lg shadow-xl'>
-                            <div class='max-w-md mx-auto'>
-                                <p class='text-gray-600'>Brands</p>
-                                <select name="brands[]" multiple>
-                                    @foreach($brands as $brand)
-                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                <div class="lg:w-4/12" style="border-right: 1px solid">
+                    <form class="space-y-3 lg:px-2 lg:space-y-4"
+                          method="GET"
+                          action="{{route('products.index')}}"
+                    >
+                        <label class='text-gray-600'>Colors</label>
+                        <div class="flex flex-wrap align-items-start justify-start">
+                            @foreach($colors as $color)
+                                <div
+                                    class="mr-4 last:mr-0 mb-2 block p-1 border-2 border-gray-500 rounded-full transition ease-in duration-300"
+                                    style="display: flex"
+                                >
+                                    <input
+                                        type="radio"
+                                        id="color_{{$color->id}}"
+                                        style="display: none"
+                                        name="color"
+                                        class="filter-color"
+                                        value="{{$color->id}}"
+                                        {{request()->get('color', '') == $color->id ? 'checked' : ''}}
+                                    >
+                                    <label for="color_{{$color->id}}"
+                                           class="block w-6 h-6 rounded-full cursor-pointer"
+                                           style="display: block; background-color: {{$color->hex}}"
+                                    ></label>
+                                </div>
+                            @endforeach
                         </div>
-                    </div>
-                    <button type="submit">Filter</button>
-                </form>
-                <div class="mt-6 lg:mt-0 lg:px-2 lg:w-4/5  mx-auto flex items-center flex-wrap pt-4 pb-12">
+                        <!-- component -->
+                        <div class='flex flex-wrap align-items-start justify-start'>
+                            <label for="brands" class='text-gray-600'>Brands</label>
+                            <select id="brands" name="brands[]" style="min-height: 250px; width: 100%" multiple>
+                                @foreach($brands as $brand)
+                                    <option value="{{$brand->id}}"
+                                            @if(in_array($brand->id, request()->get('brands', []))) selected @endif
+                                    >{{$brand->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <x-button action="submit" type="button" class="w-full m-0 font-bold" style="margin: 1rem 0 0;">
+                            Filter
+                        </x-button>
+                    </form>
+                    <form class="space-y-3 lg:px-2 lg:space-y-4"
+                          method="GET"
+                          action="{{route('products.index')}}"
+                    >
+                        <x-button action="submit" colorType="warning" type="button" class="w-full m-0 font-bold"
+                                  style="margin: 1rem 0 0;">Reset
+                        </x-button>
+                    </form>
+                </div>
+                <div class="mt-6 lg:mt-0 lg:px-2 lg:w-8/12  mx-auto flex items-center flex-wrap pt-4 pb-12">
                     @foreach($products as $product)
                         <x-product-grid :product="$product"/>
                     @endforeach
+                    <br>
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -53,12 +54,16 @@ class Image extends Model
     {
         return Attribute::make(
             get: function() {
-                if (!Storage::exists($this->attributes['path'])) {
-                    return $this->attributes['path'];
+                $key = "products.images.{$this->attributes['path']}";
+
+                if (!Cache::has($key)) {
+                    $link = Storage::temporaryUrl($this->attributes['path'], now()->addMinutes(10));
+                    Cache::put($key, $link, 570);
+                    return $link;
                 }
 
                 // public/images/.....png
-                return Storage::url($this->attributes['path']);
+                return Cache::get($key);
             }
         );
     }
