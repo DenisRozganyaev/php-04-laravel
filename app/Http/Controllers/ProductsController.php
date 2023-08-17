@@ -11,9 +11,9 @@ use PhpParser\Builder;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request, ProductRepositoryContract $repository)
     {
-        $products = Product::orderByDesc('id')->available()->take(8)->get();
+        $products = $repository->paginate(8, $request);
         $colors = Color::withExists('products')->get();
         $brands = Brand::all();
 
