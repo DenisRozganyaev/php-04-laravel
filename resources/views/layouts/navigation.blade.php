@@ -27,6 +27,19 @@
 
             <!-- Settings Dropdown -->
             <div class="order-2 md:order-3 flex items-center" id="nav-content">
+                <div class="mx-8 shadow rounded-full h-10 w-full flex p-1 relative items-center">
+                    @foreach(config('app.locales') as $lang)
+                        <form action="{{route('locale')}}" class="w-full flex justify-center" method="POST">
+                            @csrf
+                            <input type="hidden" name="locale" value="{{ $lang }}">
+                            <button type="submit">{{ $lang }}</button>
+                        </form>
+                    @endforeach
+                    <span
+                        class="elSwitch bg-indigo-600 shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 transition-all top-[4px] absolute left-1 ">
+        {{ app()->currentLocale() }}
+        </span>
+                </div>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -47,7 +60,8 @@
                                 </svg>
                             </div>
                         </button>
-                        <a class="pl-3 inline-block no-underline hover:text-black inline-flex items-center justify-between" href="{{route('cart.index')}}">
+                        <a class="pl-3 inline-block no-underline hover:text-black inline-flex items-center justify-between"
+                           href="{{route('cart.index')}}">
                             <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24"
                                  height="24" viewBox="0 0 24 24">
                                 <path

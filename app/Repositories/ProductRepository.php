@@ -24,7 +24,9 @@ class ProductRepository implements Contracts\ProductRepositoryContract
             $data = $this->formatRequestData($request);
             $data['attributes'] = $this->addSlugToAttributes($data['attributes']);
             ksort($data['attributes']);
-            $product = Product::create($data['attributes']);
+            $product = $request->get('is_common', false)
+                ? Product::create($data['attributes'])
+                : auth()->user()->products()->create($data['attributes']);
             $this->setProductData($product, $data);
 
             DB::commit();

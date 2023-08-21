@@ -12,12 +12,21 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class, 'product');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::with('categories')->orderByDesc('id')->paginate(5);
+        $products = Product::with('categories')
+//            ->where('user_id', '=', null)
+//            ->orWhere('user_id', '=', auth()->id())
+            ->orderByDesc('id')->paginate(5);
 
         return view('admin/products/index', compact('products'));
     }

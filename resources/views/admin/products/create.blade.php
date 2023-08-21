@@ -17,6 +17,14 @@
                                       method="POST">
                                     @csrf
 
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2"
+                                               for="is_common">Is Common</label>
+                                        <input
+                                            class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                                            type="checkbox" id="is_common" name="is_common" value="1" />
+                                        <x-input-error :messages="$errors->get('SKU')" class="mt-2" />
+                                    </div>
                                     @if (!empty($categories))
                                         <div class="mb-4">
                                             <label class="block text-gray-700 text-sm font-bold mb-2" for="categories">Categories</label>

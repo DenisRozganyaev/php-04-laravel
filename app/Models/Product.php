@@ -59,6 +59,7 @@ class Product extends Model implements Buyable
 
     protected $fillable = [
         'slug',
+        'user_id',
         'title',
         'description',
         'SKU',
@@ -106,6 +107,11 @@ class Product extends Model implements Buyable
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function thumbnailUrl(): Attribute
