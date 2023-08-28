@@ -1,0 +1,116 @@
+{
+  "_bootstrap-51eff01f.js": {
+    "file": "assets/bootstrap-51eff01f.js"
+  },
+  "resources/css/admin/app.scss": {
+    "file": "assets/app-6da99d9f.css",
+    "isEntry": true,
+    "src": "resources/css/admin/app.scss"
+  },
+  "resources/css/app.scss": {
+    "file": "assets/app-87a294e0.css",
+    "isEntry": true,
+    "src": "resources/css/app.scss"
+  },
+  "resources/fonts/admin/nucleo-icons.eot": {
+    "file": "assets/nucleo-icons-c4c7b7a1.js",
+    "imports": [
+      "resources/fonts/admin/nucleo.eot"
+    ],
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo-icons.eot"
+  },
+  "resources/fonts/admin/nucleo-icons.svg": {
+    "file": "assets/nucleo-icons-b2dfea3a.js",
+    "imports": [
+      "resources/fonts/admin/nucleo.eot"
+    ],
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo-icons.svg"
+  },
+  "resources/fonts/admin/nucleo-icons.ttf": {
+    "file": "assets/nucleo-icons-22635f17.js",
+    "imports": [
+      "resources/fonts/admin/nucleo.eot"
+    ],
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo-icons.ttf"
+  },
+  "resources/fonts/admin/nucleo-icons.woff": {
+    "file": "assets/nucleo-icons-25539890.js",
+    "imports": [
+      "resources/fonts/admin/nucleo.eot"
+    ],
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo-icons.woff"
+  },
+  "resources/fonts/admin/nucleo-icons.woff2": {
+    "file": "assets/nucleo-icons-c8ca6014.js",
+    "imports": [
+      "resources/fonts/admin/nucleo.eot"
+    ],
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo-icons.woff2"
+  },
+  "resources/fonts/admin/nucleo.eot": {
+    "file": "assets/nucleo-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo.eot"
+  },
+  "resources/fonts/admin/nucleo.ttf": {
+    "file": "assets/nucleo-b2dfea3a.js",
+    "imports": [
+      "resources/fonts/admin/nucleo.eot"
+    ],
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo.ttf"
+  },
+  "resources/fonts/admin/nucleo.woff": {
+    "file": "assets/nucleo-c4c7b7a1.js",
+    "imports": [
+      "resources/fonts/admin/nucleo.eot"
+    ],
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo.woff"
+  },
+  "resources/fonts/admin/nucleo.woff2": {
+    "file": "assets/nucleo-22635f17.js",
+    "imports": [
+      "resources/fonts/admin/nucleo.eot"
+    ],
+    "isEntry": true,
+    "src": "resources/fonts/admin/nucleo.woff2"
+  },
+  "resources/js/admin/app.js": {
+    "file": "assets/app-63ead76f.js",
+    "imports": [
+      "_bootstrap-51eff01f.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/admin/app.js"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-26794458.js",
+    "imports": [
+      "_bootstrap-51eff01f.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/counter.js": {
+    "file": "assets/counter-72af86da.js",
+    "imports": [
+      "_bootstrap-51eff01f.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/counter.js"
+  },
+  "resources/js/payment/paypal.js": {
+    "file": "assets/paypal-1b29942d.js",
+    "imports": [
+      "_bootstrap-51eff01f.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/payment/paypal.js"
+  }
+}
