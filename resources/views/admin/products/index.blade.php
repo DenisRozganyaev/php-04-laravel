@@ -93,18 +93,22 @@
                                         <td class="p-2 align-middle bg-transparent border-b shadow-transparent">
                                             <div class="flex px-2 py-1">
                                                 <div class="flex flex-row justify-center">
-                                                    <x-button href="{{ route('admin.products.edit', $product) }}"
-                                                              color-type="warning">
-                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                    </x-button>
-                                                    <form action="{{ route('admin.products.destroy', $product) }}"
-                                                          method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <x-button type="button" action="submit" color-type="danger">
-                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    @can('update', $product)
+                                                        <x-button href="{{ route('admin.products.edit', $product) }}"
+                                                                  color-type="warning">
+                                                            <i class="fa fa-pencil" aria-hidden="true"></i>
                                                         </x-button>
-                                                    </form>
+                                                    @endcan
+                                                    @can('delete', $product)
+                                                        <form action="{{ route('admin.products.destroy', $product) }}"
+                                                              method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <x-button type="button" action="submit" color-type="danger">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </x-button>
+                                                        </form>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>

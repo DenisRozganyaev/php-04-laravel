@@ -31,7 +31,8 @@ class CreateProductRequest extends FormRequest
             'quantity' => ['required', 'numeric', 'min:0'],
             'thumbnail' => ['required', 'image:jpeg,png'],
             'images.*' => ['image:jpeg,png'],
-            'categories.*' => ['nullable', 'numeric', 'exists:App\Models\Category,id']
+            'categories.*' => ['nullable', 'numeric', 'exists:App\Models\Category,id'],
+            'is_common' => ['nullable', 'boolean']
         ];
     }
 }
