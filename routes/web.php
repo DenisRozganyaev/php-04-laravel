@@ -29,6 +29,10 @@ Route::post("locale", function (\Illuminate\Http\Request $request) {
     return redirect()->route('home');
 })->name('locale');
 
+Route::get('notification', function() {
+    \App\Events\UserNotify::dispatch('some other message');
+});
+
 Route::get('invoice', function () {
     $order = \App\Models\Order::all()->last();
     \App\Events\OrderCreated::dispatch($order);

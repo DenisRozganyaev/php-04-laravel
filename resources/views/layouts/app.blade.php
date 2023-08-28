@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/iziToast.css') }}">
 
+    <script>
+        window.userID = {{auth()->id()}}
+    </script>
     <!-- Scripts -->
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
     <style>

@@ -36,8 +36,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        logs()->info('LOCALE BEFORE => ' . app()->currentLocale() . ' => ' . session()->get('locale'));
+//        logs()->info('LOCALE BEFORE => ' . app()->currentLocale() . ' => ' . session()->get('locale'));
         app()->setLocale(session()->get('locale') ?? 'en');
-        logs()->info('LOCALE AFTER => ' . app()->currentLocale() . ' => ' . session()->get('locale'));
+//        logs()->info('LOCALE AFTER => ' . app()->currentLocale() . ' => ' . session()->get('locale'));
     }
 }
