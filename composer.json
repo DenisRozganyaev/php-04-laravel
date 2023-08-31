@@ -9,6 +9,7 @@
         "anayarojo/shoppingcart": "^4.2",
         "appslabke/lara-izitoast": "^1.1",
         "azate/laravel-telegram-login-auth": "^2.3",
+        "fakerphp/faker": "^1.23",
         "guzzlehttp/guzzle": "^7.2",
         "laravel-notification-channels/telegram": "^4.0",
         "laravel/framework": "^10.10",
@@ -25,7 +26,6 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
-        "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.21",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.23",
