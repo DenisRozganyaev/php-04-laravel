@@ -17,9 +17,11 @@ class UsersSeeder extends Seeder
     public function run(): void
     {
         if (!User::where('email', self::ADMIN_EMAIL)->exists()) {
-            $admin = User::factory()->withEmail(self::ADMIN_EMAIL)->create();
+            $admin = User::factory()->withEmail(self::ADMIN_EMAIL)->create([
+
+            ]);
             $admin->syncRoles(Roles::ADMIN->value);
         }
-        User::factory(5)->create();
+//        User::factory(5)->create();
     }
 }

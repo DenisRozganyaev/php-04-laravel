@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Account\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('auth.google');
+
+Route::get('/auth/google/callback', [\App\Http\Controllers\Auth\OAuthController::class, 'viaGoogle'])->name('auth.google.callback');
+
 Route::post("locale", function (\Illuminate\Http\Request $request) {
     if (!$request->has('locale') || !in_array($request->get('locale'), config('app.locales'))) {
         abort(404);
@@ -30,7 +36,8 @@ Route::post("locale", function (\Illuminate\Http\Request $request) {
 })->name('locale');
 
 Route::get('notification', function() {
-    \App\Events\UserNotify::dispatch('some other message');
+    dd(\Illuminate\Support\Facades\Hash::make(Str::random(8)));
+//    \App\Events\UserNotify::dispatch('some other message');
 });
 
 Route::get('invoice', function () {
